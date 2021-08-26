@@ -82,8 +82,7 @@ export function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    event({
-      action: "submit_form",
+    event("submit_form", {
       category: "Contact",
       label: message,
     });
