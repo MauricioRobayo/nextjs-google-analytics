@@ -1,6 +1,7 @@
 # Nextjs Google Analytics
 
 [![npm version](https://badge.fury.io/js/nextjs-google-analytics.svg)](https://badge.fury.io/js/nextjs-google-analytics)
+[![codecov](https://codecov.io/gh/MauricioRobayo/nextjs-google-analytics/branch/main/graph/badge.svg?token=ywhhMAVgON)](https://codecov.io/gh/MauricioRobayo/nextjs-google-analytics)
 [![CodeFactor](https://www.codefactor.io/repository/github/mauriciorobayo/nextjs-google-analytics/badge)](https://www.codefactor.io/repository/github/mauriciorobayo/nextjs-google-analytics)
 
 Google Analytics for Next.js, based on the official next.js example [with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).
