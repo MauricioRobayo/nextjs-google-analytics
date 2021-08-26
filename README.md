@@ -58,7 +58,7 @@ const App = ({ Component, pageProps }) => {
   
   usePageView();
 
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 };
 
 export default App;
