@@ -11,7 +11,7 @@ export function usePageView(): void {
         return;
       }
 
-      pageView(url);
+      pageView({ path: url.toString() });
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
