@@ -1,7 +1,5 @@
 import React from "react";
 
-const isProduction = process.env.NODE_ENV === "production";
-
 type GoogleAnalyticsProps = {
   gaMeasurementId: string;
 };
@@ -9,13 +7,12 @@ type GoogleAnalyticsProps = {
 export function GoogleAnalytics({
   gaMeasurementId,
 }: GoogleAnalyticsProps): JSX.Element | null {
-  if (!isProduction) {
+  if (process.env.NODE_ENV !== "production") {
     return null;
   }
 
   return (
     <>
-      {/* Global Site Tag (gtag.js) - Google Analytics */}
       <script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}

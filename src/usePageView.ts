@@ -2,16 +2,15 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { pageView } from "./gtag";
 
-const isProduction = process.env.NODE_ENV;
-
-export const usePageView = (): void => {
+export function usePageView(): void {
   const router = useRouter();
 
   useEffect(() => {
     const handleRouteChange = (url: URL): void => {
-      if (!isProduction) {
+      if (process.env.NODE_ENV !== "production") {
         return;
       }
+
       pageView(url);
     };
 
@@ -21,4 +20,4 @@ export const usePageView = (): void => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-};
+}

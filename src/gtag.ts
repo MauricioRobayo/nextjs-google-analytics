@@ -1,6 +1,5 @@
 // https://github.com/vercel/next.js/blob/master/examples/with-google-analytics/lib/gtag.js
 
-const isProduction = process.env.NODE_ENV === "production";
 const missingGtagMsg =
   "Gtag is missing. Add the `GoogleAnalytics` component to the `Head` component inside `_document.js`.";
 
@@ -22,7 +21,7 @@ export function pageView(url: URL): void {
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 export function event({ action, category, label, value }: Event): void {
-  if (!isProduction) {
+  if (process.env.NODE_ENV !== "production") {
     return;
   }
 
