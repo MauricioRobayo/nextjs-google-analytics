@@ -49,18 +49,19 @@ Call the `usePageView` hook inside `_app.js`:
 ```js
 // /pages/_app.js
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { usePageView } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
+  const router = useRouter();
+  
   usePageView();
-  const router = useRouter()
 
   return <Component {...pageProps} />
-}
+};
 
-export default
+export default App;
 ```
 
 ## Custom event
