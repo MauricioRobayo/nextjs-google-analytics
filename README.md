@@ -102,6 +102,10 @@ export function Contact() {
 }
 ```
 
+## TypeScript
+
+The module is written in TypeScript and type definitions are included.
+
 ## LICENSE
 
 [MIT](./LICENSE)
