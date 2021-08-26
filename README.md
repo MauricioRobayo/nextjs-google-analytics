@@ -1,10 +1,8 @@
 # Nextjs Google Analytics
 
-Google Analytics for Next.js, based on the [next.js / example / with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).
+Google Analytics for Next.js, based on the official next.js example [with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).
 
-It will only be loaded on `production` environments. To test it, you can run the development server with set `NODE_ENV` to `production`, for example:
-
-`NODE_ENV=production npm run dev`
+It will only be loaded on `production` environments.
 
 ## Installation
 
@@ -28,7 +26,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <GoogleAnalytics />
+          <GoogleAnalytics gaMeasurementId={"YOUR MEASUREMENT ID"} />
         </Head>
         <body>
           <Main />
