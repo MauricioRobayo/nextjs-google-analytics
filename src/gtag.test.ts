@@ -50,7 +50,7 @@ describe("event", () => {
 
   it("should log a warning if NODE_ENV is production but gtag is not available", () => {
     process.env.NODE_ENV = "production";
-    // eslint-disable-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     window.gtag = undefined as any;
 
     event(mockEvent, {
