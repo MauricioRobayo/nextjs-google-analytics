@@ -27,6 +27,7 @@ export function event(
   action: "page_view" | string,
   options: EventOptions | PageViewOptions
 ): void {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const prefix = action === "page_view" ? "page" : "event";
 
   const properOptions = Object.fromEntries(
@@ -43,7 +44,7 @@ export function event(
     })
   );
 
-  if (process.env.NODE_ENV !== "production") {
+  if (!gaMeasurementId) {
     return;
   }
 

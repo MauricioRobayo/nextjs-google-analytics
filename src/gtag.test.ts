@@ -1,6 +1,7 @@
 import { event, pageView } from "./gtag";
 
 const OLD_ENV = process.env;
+const mockGaMeasurementId = "mock ga measurement id";
 
 beforeEach(() => {
   console.warn = jest.fn();
@@ -22,7 +23,7 @@ describe("event", () => {
   const mockValue = 1;
 
   it("should call gtag with the correct options", () => {
-    process.env.NODE_ENV = "production";
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = mockGaMeasurementId;
 
     event(mockEvent, {
       category: mockCategory,
@@ -38,7 +39,7 @@ describe("event", () => {
     });
   });
 
-  it("should not call gtag if NODE_ENV is not production", () => {
+  it("should not call gtag if NEXT_PUBLIC_GA_MEASUREMENT_ID is not set", () => {
     event(mockEvent, {
       category: mockCategory,
       label: mockLabel,
@@ -48,8 +49,8 @@ describe("event", () => {
     expect(window.gtag).not.toBeCalled();
   });
 
-  it("should log a warning if NODE_ENV is production but gtag is not available", () => {
-    process.env.NODE_ENV = "production";
+  it("should log a warning if NEXT_PUBLIC_GA_MEASUREMENT_ID is set but gtag is not available", () => {
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = mockGaMeasurementId;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     window.gtag = undefined as any;
 
@@ -73,7 +74,7 @@ describe("pageView", () => {
   const mockSendPageView = true;
 
   it("should call gtag with the correct options", () => {
-    process.env.NODE_ENV = "production";
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = mockGaMeasurementId;
 
     pageView({
       title: mockTitle,

@@ -7,7 +7,7 @@ export function usePageView(): void {
 
   useEffect(() => {
     const handleRouteChange = (url: URL): void => {
-      if (process.env.NODE_ENV !== "production") {
+      if (!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
         return;
       }
 
