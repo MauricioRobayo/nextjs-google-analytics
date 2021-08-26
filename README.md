@@ -12,7 +12,7 @@ npm install --save nextjs-google-analytics
 
 ## Usage
 
-Add the `gtag` script inside the `Head` to a custom document using the `GoogleAnalytics` component:
+Add the ``GoogleAnalytics` components inside the `Head` to a [custom document](https://nextjs.org/docs/advanced-features/custom-document), this will take care of including the necessary scripts:
 
 ```js
 // pages/_document.js
