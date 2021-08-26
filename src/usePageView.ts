@@ -4,7 +4,7 @@ import { pageView } from "./gtag";
 
 const isProduction = process.env.NODE_ENV;
 
-export function usePageView(): void {
+export const usePageView = (): void => {
   const router = useRouter();
 
   useEffect(() => {
@@ -21,4 +21,4 @@ export function usePageView(): void {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-}
+};
