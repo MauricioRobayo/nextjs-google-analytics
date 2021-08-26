@@ -1,7 +1,7 @@
 {
   "name": "nextjs-google-analytics",
   "version": "0.1.0",
-  "description": "",
+  "description": "Google Analytics for Next.js",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src --fix",
@@ -34,5 +34,13 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MauricioRobayo/nextjs-google-analytics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MauricioRobayo/nextjs-google-analytics/issues"
+  },
+  "homepage": "https://github.com/MauricioRobayo/nextjs-google-analytics#readme"
 }
