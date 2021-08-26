@@ -66,7 +66,7 @@ export default App;
 
 ## Custom event
 
-You can import the `event` function to track a custom event:
+You can use the `event` function to track a custom event:
 
 ```js
 import { useState } from "react";
