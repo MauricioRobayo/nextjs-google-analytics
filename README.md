@@ -84,7 +84,7 @@ export function Contact() {
     event({
       action: "submit_form",
       category: "Contact",
-      label: this.state.message,
+      label: message,
     });
 
     setState("");
