@@ -3,24 +3,46 @@
 const missingGtagMsg =
   "Gtag is missing. Add the `GoogleAnalytics` component to the `Head` component inside `_document.js`.";
 
-type Event = {
-  action: string;
+type EventOptions = {
   category?: string;
   label?: string;
   value?: number;
-  page_path?: URL;
+};
+type PageViewOptions = {
+  title?: string;
+  location?: string;
+  path: string;
+  sendPageView?: boolean;
 };
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-export function pageView(url: URL): void {
-  event({
-    action: "page_view",
-    page_path: url,
-  });
+export function pageView(options: PageViewOptions): void {
+  event("page_view", options);
 }
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export function event({ action, category, label, value }: Event): void {
+export function event(action: "page_view", options: PageViewOptions): void;
+export function event(action: string, options: EventOptions): void;
+export function event(
+  action: "page_view" | string,
+  options: EventOptions | PageViewOptions
+): void {
+  const prefix = action === "page_view" ? "page" : "event";
+
+  const properOptions = Object.fromEntries(
+    Object.entries(options).map(([key, value]) => {
+      if (key === "sendPageView") {
+        return ["send_page_view", value];
+      }
+
+      if (key === "value") {
+        return [key, value];
+      }
+
+      return [`${prefix}_${key}`, value];
+    })
+  );
+
   if (process.env.NODE_ENV !== "production") {
     return;
   }
@@ -30,9 +52,5 @@ export function event({ action, category, label, value }: Event): void {
     return;
   }
 
-  window.gtag("event", action, {
-    event_category: category,
-    event_label: label,
-    value,
-  });
+  window.gtag("event", action, properOptions);
 }
