@@ -1,9 +1,9 @@
 import React from "react";
 
-const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
 export function GoogleAnalytics(): JSX.Element | null {
-  if (process.env.NODE_ENV !== "production") {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
+  if (!gaMeasurementId) {
     return null;
   }
 
