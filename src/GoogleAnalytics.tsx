@@ -1,13 +1,9 @@
 import React from "react";
 
-type GoogleAnalyticsProps = {
-  gaMeasurementId: string;
-};
+export function GoogleAnalytics(): JSX.Element | null {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-export function GoogleAnalytics({
-  gaMeasurementId,
-}: GoogleAnalyticsProps): JSX.Element | null {
-  if (process.env.NODE_ENV !== "production") {
+  if (!gaMeasurementId) {
     return null;
   }
 

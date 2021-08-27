@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when measurement id is set 1`] = `
+Array [
+  <script
+    async={true}
+    src="https://www.googletagmanager.com/gtag/js?id=mock"
+  />,
+  <script
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'mock', {
+              page_path: window.location.pathname,
+            });
+          ",
+      }
+    }
+  />,
+]
+`;
+
+exports[`renders null when measurement id is not set 1`] = `null`;
