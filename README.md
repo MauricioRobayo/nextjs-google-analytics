@@ -6,7 +6,20 @@
 
 Google Analytics for Next.js, based on the official next.js example [with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).
 
-It will only be loaded on `production` environments.
+Your _Google Analytics measurement id_ is read from `NEXT_PUBLIC_GA_MEASUREMENT_ID`, so make sure it is set in your production environment:
+
+- [Vercel](https://vercel.com/docs/environment-variables)
+- [Netlify](https://www.netlify.com/blog/2020/12/10/environment-variables-in-next.js-and-netlify/)
+
+If the variable is not set or is empty, nothing will be loaded, making it safe to work in development.
+
+To load it and test it on development, add:
+
+```
+NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXXXX"
+```
+
+to `.env.local`.
 
 ## Installation
 
@@ -30,7 +43,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <GoogleAnalytics gaMeasurementId={"YOUR MEASUREMENT ID"} />
+          <GoogleAnalytics />
         </Head>
         <body>
           <Main />
