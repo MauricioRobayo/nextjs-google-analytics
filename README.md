@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/MauricioRobayo/nextjs-google-analytics/branch/main/graph/badge.svg?token=ywhhMAVgON)](https://codecov.io/gh/MauricioRobayo/nextjs-google-analytics)
 [![CodeFactor](https://www.codefactor.io/repository/github/mauriciorobayo/nextjs-google-analytics/badge)](https://www.codefactor.io/repository/github/mauriciorobayo/nextjs-google-analytics)
 
-Google Analytics for Next.js, based on the official next.js example [with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).
+**Google Analytics for Next.js, based on the official next.js example [with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).**
 
 Your _Google Analytics measurement id_ is read from `NEXT_PUBLIC_GA_MEASUREMENT_ID`, so make sure it is set in your production environment:
 
@@ -29,7 +29,7 @@ npm install --save nextjs-google-analytics
 
 ## Usage
 
-Add the `GoogleAnalytics` components inside the `Head` to a [custom document](https://nextjs.org/docs/advanced-features/custom-document), this will take care of including the necessary scripts:
+Add the `GoogleAnalytics` components to the `Head` component in a [custom document](https://nextjs.org/docs/advanced-features/custom-document), this will take care of including the necessary scripts:
 
 ```js
 // pages/_document.js
@@ -62,13 +62,13 @@ Call the `usePageView` hook inside `_app.js`:
 ```js
 // /pages/_app.js
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { usePageView } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
-  
+
   usePageView();
 
   return <Component {...pageProps} />;
