@@ -10,12 +10,12 @@ type PageViewOptions = {
   path?: string;
   sendPageView?: boolean;
 };
-export const pageView = ({
+export function pageView({
   title,
   location,
   path,
   sendPageView,
-}: PageViewOptions = {}): void => {
+}: PageViewOptions = {}): void {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   if (!gaMeasurementId) {
@@ -51,7 +51,7 @@ export const pageView = ({
   }
 
   window.gtag("config", gaMeasurementId, pageViewOptions);
-};
+}
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 type EventOptions = {
