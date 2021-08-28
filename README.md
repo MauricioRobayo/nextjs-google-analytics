@@ -33,7 +33,7 @@ to your `.env.local` file.
 
 ## Scripts
 
-Use the `GoogleAnalytics` components to load the gtag scripts. You can add them to `_app` and this will take care of including the necessary scripts for every page, but you could also add it on a per page basis if you need more control:
+Use the `GoogleAnalytics` component to load the gtag scripts. You can add them to `_app` and this will take care of including the necessary scripts for every page, but you could also add it on a per page basis if you need more control:
 
 ```js
 // /pages/_app.js
@@ -54,7 +54,7 @@ export default App;
 
 ## Page views
 
-To track page views, call the `usePagesViews` hook inside `_app.js`, make sure to include the necessary script with the `GoogleAnalytics` component:
+To track all pages views, call the `usePagesViews` hook inside `_app.js`, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:
 
 ```js
 // /pages/_app.js
@@ -62,7 +62,7 @@ To track page views, call the `usePagesViews` hook inside `_app.js`, make sure t
 import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
-  usePagesView();
+  usePagesViews();
 
   return (
     <>
@@ -122,6 +122,14 @@ export function Contact() {
 ## TypeScript
 
 The module is written in TypeScript and type definitions are included.
+
+## Contributing
+
+Contributions, issues and feature requests are welcome!
+
+## Show your support
+
+Give a ⭐️ if you like this project!
 
 ## LICENSE
 
