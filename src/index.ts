@@ -1,3 +1,3 @@
 export { GoogleAnalytics } from "./GoogleAnalytics";
-export { usePageView } from "./usePageView";
+export { usePagesViews } from "./usePagesViews";
 export { pageView, event } from "./gtag";
