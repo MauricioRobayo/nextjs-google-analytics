@@ -33,11 +33,10 @@ to your `.env.local` file.
 
 ## Scripts
 
-Use the `GoogleAnalytics` component to load the gtag scripts. You can add them to `_app` and this will take care of including the necessary scripts for every page, but you could also add it on a per page basis if you need more control:
+Use the `GoogleAnalytics` component to load the gtag scripts. You can add them to a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, and this will take care of including the necessary scripts for every page, but you could also add it on a per page basis if you need more control:
 
 ```js
-// /pages/_app.js
-
+// pages/_app.js
 import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
@@ -54,11 +53,10 @@ export default App;
 
 ## Page views
 
-To track all pages views, call the `usePagesViews` hook inside `_app.js`, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:
+To track all pages views, call the `usePagesViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:
 
 ```js
-// /pages/_app.js
-
+// pages/_app.js
 import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
@@ -121,12 +119,11 @@ export function Contact() {
 
 ## Web Vitals
 
-To send [Next.js web vitals](https://nextjs.org/docs/advanced-features/measuring-performance#sending-results-to-analytics) to Google Analytics you can use a custom event on the `reportWebVitals` function inside `_app.js`:
+To send [Next.js web vitals](https://nextjs.org/docs/advanced-features/measuring-performance#sending-results-to-analytics) to Google Analytics you can use a custom event on the `reportWebVitals` function inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component:
 
 ```js
-// /pages/_app.js
-
-import { GoogleAnalytics, usePagesViews, event } from "nextjs-google-analytics";
+// pages/_app.js
+import { GoogleAnalytics, event } from "nextjs-google-analytics";
 
 export function reportWebVitals({ id, name, label, value }) {
   event(name, {
@@ -138,8 +135,6 @@ export function reportWebVitals({ id, name, label, value }) {
 }
 
 const App = ({ Component, pageProps }) => {
-  usePagesViews();
-
   return (
     <>
       <GoogleAnalytics />
@@ -149,6 +144,16 @@ const App = ({ Component, pageProps }) => {
 };
 
 export default App;
+```
+
+If you are using TypeScript,you can import `NextWebVitalsMetric` from `next/app`:
+
+```ts
+import type { NextWebVitalsMetric } from "next/app";
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  // ...
+}
 ```
 
 ## TypeScript
@@ -166,3 +171,7 @@ Give a ⭐️ if you like this project!
 ## LICENSE
 
 [MIT](./LICENSE)
+
+```
+
+```
