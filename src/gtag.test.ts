@@ -21,6 +21,7 @@ describe("event", () => {
   const mockCategory = "mock category";
   const mockLabel = "mock label";
   const mockValue = 1;
+  const mockNonInteraction = true;
 
   it("should not call gtag if measurement id is not set", () => {
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = undefined;
@@ -50,6 +51,7 @@ describe("event", () => {
         category: mockCategory,
         label: mockLabel,
         value: mockValue,
+        nonInteraction: mockNonInteraction,
       });
 
       expect(window.gtag).toBeCalledTimes(1);
@@ -57,6 +59,7 @@ describe("event", () => {
         event_category: mockCategory,
         event_label: mockLabel,
         value: mockValue,
+        non_interaction: mockNonInteraction,
       });
     });
 

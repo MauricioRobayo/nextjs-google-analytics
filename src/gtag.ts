@@ -58,10 +58,11 @@ type EventOptions = {
   category?: string;
   label?: string;
   value?: number;
+  nonInteraction?: boolean;
 };
 export function event(
   action: string,
-  { category, label, value }: EventOptions = {}
+  { category, label, value, nonInteraction }: EventOptions = {}
 ): void {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
@@ -78,6 +79,7 @@ export function event(
     event_category?: string;
     event_label?: string;
     value?: number;
+    non_interaction?: boolean;
   } = {};
 
   if (category !== undefined) {
@@ -90,6 +92,10 @@ export function event(
 
   if (value !== undefined) {
     eventOptions.value = value;
+  }
+
+  if (nonInteraction !== undefined) {
+    eventOptions.non_interaction = nonInteraction;
   }
 
   window.gtag("event", action, eventOptions);
