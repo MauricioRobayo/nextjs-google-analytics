@@ -1,4 +1,5 @@
 import React from "react";
+import Script from "next/script";
 
 export function GoogleAnalytics(): JSX.Element | null {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
@@ -9,11 +10,10 @@ export function GoogleAnalytics(): JSX.Element | null {
 
   return (
     <>
-      <script
-        async
+      <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
       />
-      <script
+      <Script
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
