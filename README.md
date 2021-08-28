@@ -4,7 +4,17 @@
 [![codecov](https://codecov.io/gh/MauricioRobayo/nextjs-google-analytics/branch/main/graph/badge.svg?token=ywhhMAVgON)](https://codecov.io/gh/MauricioRobayo/nextjs-google-analytics)
 [![CodeFactor](https://www.codefactor.io/repository/github/mauriciorobayo/nextjs-google-analytics/badge)](https://www.codefactor.io/repository/github/mauriciorobayo/nextjs-google-analytics)
 
-**Google Analytics for Next.js, based on the official next.js example [with-google-analytics](https://github.com/vercel/next.js/tree/master/examples/with-google-analytics).**
+**Google Analytics for Next.js**
+
+This package optimizes script loading using [Next.js `Script` tag](https://nextjs.org/docs/basic-features/script), which means that it will **only work on apps using Next.js >= 11.0.0**.
+
+## Installation
+
+```
+npm install --save nextjs-google-analytics
+```
+
+## Usage
 
 Your _Google Analytics measurement id_ is read from `NEXT_PUBLIC_GA_MEASUREMENT_ID` environment variable, so make sure it is set in your production environment:
 
@@ -19,63 +29,53 @@ To load it and test it on development, add:
 NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXXXX"
 ```
 
-to `.env.local`.
+to your `.env.local` file.
 
-## Installation
+## Scripts
 
-```
-npm install --save nextjs-google-analytics
-```
-
-## Usage
-
-Add the `GoogleAnalytics` components to the `Head` component in a [custom document](https://nextjs.org/docs/advanced-features/custom-document), this will take care of including the necessary scripts:
-
-```js
-// pages/_document.js
-
-import Document, { Html, Head, Main, NextScript } from "next/document";
-
-import { GoogleAnalytics } from "nextjs-google-analytics";
-
-export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html>
-        <Head>
-          <GoogleAnalytics />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
-}
-```
-
-## Page views
-
-Call the `usePageView` hook inside `_app.js`:
+Use the `GoogleAnalytics` components to load the gtag scripts. You can add them to `_app` and this will take care of including the necessary scripts for every page, but you could also add it on a per page basis if you need more control:
 
 ```js
 // /pages/_app.js
 
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { usePageView } from "nextjs-google-analytics";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
-  const router = useRouter();
-
-  usePageView();
-
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <GoogleAnalytics />
+      <Component {...pageProps} />
+    </>
+  );
 };
 
 export default App;
 ```
+
+## Page views
+
+To track page views, call the `usePagesViews` hook inside `_app.js`, make sure to include the necessary script with the `GoogleAnalytics` component:
+
+```js
+// /pages/_app.js
+
+import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
+
+const App = ({ Component, pageProps }) => {
+  usePagesView();
+
+  return (
+    <>
+      <GoogleAnalytics />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
+The module also exports a `pageView` method that you can use if you need more grain control.
 
 ## Custom event
 
