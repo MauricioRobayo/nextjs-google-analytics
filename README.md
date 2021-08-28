@@ -119,6 +119,38 @@ export function Contact() {
 }
 ```
 
+## Web Vitals
+
+To send [Next.js web vitals](https://nextjs.org/docs/advanced-features/measuring-performance#sending-results-to-analytics) to Google Analytics you can use a custom event on the `reportWebVitals` function inside `_app.js`:
+
+```js
+// /pages/_app.js
+
+import { GoogleAnalytics, usePagesViews, event } from "nextjs-google-analytics";
+
+export function reportWebVitals({ id, name, label, value }) {
+  event(name, {
+    category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+    value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
+    label: id, // id unique to current page load
+    nonInteraction: true, // avoids affecting bounce rate.
+  });
+}
+
+const App = ({ Component, pageProps }) => {
+  usePagesViews();
+
+  return (
+    <>
+      <GoogleAnalytics />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
 ## TypeScript
 
 The module is written in TypeScript and type definitions are included.
