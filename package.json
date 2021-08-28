@@ -1,6 +1,6 @@
 {
   "name": "nextjs-google-analytics",
-  "version": "0.1.13",
+  "version": "0.1.15",
   "description": "Google Analytics for Next.js",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,15 @@
     "prepublishOnly": "npm run build",
     "test": "jest"
   },
-  "keywords": [],
+  "keywords": [
+    "gtag",
+    "google analytics",
+    "next.js",
+    "analytics",
+    "google tag manager",
+    "gtm",
+    "ga"
+  ],
   "author": "Mauricio Robayo",
   "license": "MIT",
   "devDependencies": {
