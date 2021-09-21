@@ -3,6 +3,7 @@
   "version": "0.1.15",
   "description": "Google Analytics for Next.js",
   "main": "dist/index.js",
+  "sideEffects": false,
   "scripts": {
     "lint": "eslint src --fix",
     "build": "del-cli dist && tsc",
