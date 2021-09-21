@@ -1,6 +1,6 @@
 {
   "name": "nextjs-google-analytics",
-  "version": "0.1.15",
+  "version": "0.2.0",
   "description": "Google Analytics for Next.js",
   "main": "dist/index.js",
   "sideEffects": false,
