@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
+    "target": "es6",
+    "module": "commonjs",
     "declaration": true,
     "sourceMap": true,
     "outDir": "./dist",
@@ -11,8 +11,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
-    "moduleResolution": "Node"
+    "jsx": "react"
   },
   "include": ["./src/**/*.ts"],
   "exclude": ["./src/**/*.test.ts"]
