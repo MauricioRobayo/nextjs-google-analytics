@@ -11,7 +11,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "Node"
   },
   "include": ["./src/**/*.ts"],
   "exclude": ["./src/**/*.test.ts"]
