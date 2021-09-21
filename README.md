@@ -171,7 +171,3 @@ Give a ⭐️ if you like this project!
 ## LICENSE
 
 [MIT](./LICENSE)
-
-```
-
-```
