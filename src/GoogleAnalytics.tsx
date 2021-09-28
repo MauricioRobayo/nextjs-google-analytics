@@ -11,20 +11,19 @@ export function GoogleAnalytics(): JSX.Element | null {
   return (
     <>
       <Script
+        id="gtag"
         src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
       />
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
+      <Script id="ga">
+        {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${gaMeasurementId}', {
               page_path: window.location.pathname,
             });
-          `,
-        }}
-      />
+          `}
+      </Script>
     </>
   );
 }
