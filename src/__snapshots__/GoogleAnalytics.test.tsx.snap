@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`renders correctly when measurement id is set 1`] = `null`;
-
-exports[`renders null when measurement id is not set 1`] = `null`;
