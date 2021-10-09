@@ -4,7 +4,7 @@ import Script, { ScriptProps } from "next/script";
 export function GoogleAnalytics({
   strategy,
 }: {
-  strategy: ScriptProps["strategy"];
+  strategy?: ScriptProps["strategy"];
 }): JSX.Element | null {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
