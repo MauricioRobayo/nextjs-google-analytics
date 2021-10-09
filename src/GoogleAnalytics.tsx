@@ -15,11 +15,10 @@ export function GoogleAnalytics({
   return (
     <>
       <Script
-        id="gtag"
         src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
         strategy={strategy}
       />
-      <Script id="ga">
+      <Script id="nextjs-google-analytics">
         {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
