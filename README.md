@@ -51,6 +51,24 @@ const App = ({ Component, pageProps }) => {
 export default App;
 ```
 
+The component exposes the [strategy](https://nextjs.org/docs/basic-features/script) prop to control how the scripts are loaded, so if you prefer to lazy load them, you can use the `lazyOnload` strategy:
+
+```js
+// pages/_app.js
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
+const App = ({ Component, pageProps }) => {
+  return (
+    <>
+      <GoogleAnalytics strategy="lazyOnLoad" />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
 ## Page views
 
 To track all pages views, call the `usePagesViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:

@@ -1,7 +1,11 @@
 import React from "react";
-import Script from "next/script";
+import Script, { ScriptProps } from "next/script";
 
-export function GoogleAnalytics(): JSX.Element | null {
+export function GoogleAnalytics({
+  strategy,
+}: {
+  strategy: ScriptProps["strategy"];
+}): JSX.Element | null {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   if (!gaMeasurementId) {
@@ -13,6 +17,7 @@ export function GoogleAnalytics(): JSX.Element | null {
       <Script
         id="gtag"
         src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+        strategy={strategy}
       />
       <Script id="ga">
         {`
