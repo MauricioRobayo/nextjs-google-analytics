@@ -10,7 +10,7 @@ This package optimizes script loading using [Next.js `Script` tag](https://nextj
 
 ## TLDR
 
-To track page views in Google Analytics, you need to add the following code to your `_app.js` file:
+To track page views in [Google Analytics](https://analytics.google.com/), you need to add the following code to your `_app.js` file:
 
 ```js
 // pages/_app.js
