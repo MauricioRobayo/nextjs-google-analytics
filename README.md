@@ -8,28 +8,6 @@
 
 This package optimizes script loading using [Next.js `Script` tag](https://nextjs.org/docs/basic-features/script), which means that it will **only work on apps using Next.js >= 11.0.0**.
 
-## TLDR
-
-To track page views in [Google Analytics](https://analytics.google.com/), you need to add the following code to your `_app.js` file:
-
-```js
-// pages/_app.js
-import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
-
-const App = ({ Component, pageProps }) => {
-  usePagesViews();
-
-  return (
-    <>
-      <GoogleAnalytics />
-      <Component {...pageProps} />
-    </>
-  );
-};
-
-export default App;
-```
-
 ## Installation
 
 ```
