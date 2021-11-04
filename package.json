@@ -23,7 +23,7 @@
   "author": "Mauricio Robayo",
   "license": "MIT",
   "devDependencies": {
-    "@types/gtag.js": "^0.0.7",
+    "@types/gtag.js": "^0.0.8",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.19",
     "@types/react-test-renderer": "^17.0.1",
