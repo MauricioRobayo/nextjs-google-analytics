@@ -62,7 +62,7 @@ import { GoogleAnalytics } from "nextjs-google-analytics";
 const App = ({ Component, pageProps }) => {
   return (
     <>
-      <GoogleAnalytics strategy="lazyOnLoad" />
+      <GoogleAnalytics strategy="lazyOnload" />
       <Component {...pageProps} />
     </>
   );
