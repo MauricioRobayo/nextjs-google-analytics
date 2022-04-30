@@ -9,12 +9,12 @@ type PageViewOptions = {
 
 export function pageView(
   { title, location, path, sendPageView }: PageViewOptions = {},
-  measurementId?: string
+  gaMeasurementId?: string
 ): void {
-  const gaMeasurementId =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
+  const _gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-  if (!gaMeasurementId || !window.gtag) {
+  if (!_gaMeasurementId || !window.gtag) {
     return;
   }
 
@@ -41,5 +41,5 @@ export function pageView(
     pageViewOptions.send_page_view = sendPageView;
   }
 
-  window.gtag("config", gaMeasurementId, pageViewOptions);
+  window.gtag("config", _gaMeasurementId, pageViewOptions);
 }

@@ -2,25 +2,25 @@ import React from "react";
 import Script, { ScriptProps } from "next/script";
 
 type GoogleAnalyticsProps = {
-  measurementId?: string;
+  gaMeasurementId?: string;
   strategy?: ScriptProps["strategy"];
 };
 
 export function GoogleAnalytics({
-  measurementId,
+  gaMeasurementId: measurementId,
   strategy = "afterInteractive",
 }: GoogleAnalyticsProps): JSX.Element | null {
-  const gaMeasurementId =
+  const _gaMeasurementId =
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
 
-  if (!gaMeasurementId) {
+  if (!_gaMeasurementId) {
     return null;
   }
 
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${_gaMeasurementId}`}
         strategy={strategy}
       />
       <Script id="nextjs-google-analytics">
@@ -28,7 +28,7 @@ export function GoogleAnalytics({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${gaMeasurementId}', {
+            gtag('config', '${_gaMeasurementId}', {
               page_path: window.location.pathname,
             });
           `}

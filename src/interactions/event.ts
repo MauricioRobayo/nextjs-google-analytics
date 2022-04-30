@@ -10,12 +10,12 @@ type EventOptions = {
 export function event(
   action: string,
   { category, label, value, nonInteraction }: EventOptions = {},
-  measurementId?: string
+  gaMeasurementId?: string
 ): void {
-  const gaMeasurementId =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
+  const _gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-  if (!gaMeasurementId || !window.gtag) {
+  if (!_gaMeasurementId || !window.gtag) {
     return;
   }
 

@@ -2,19 +2,19 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { pageView } from "../interactions";
 
-export function usePagesViews(measurementId?: string): void {
+export function usePagesViews(gaMeasurementId?: string): void {
   const router = useRouter();
 
   useEffect(() => {
     const handleRouteChange = (url: URL): void => {
-      const gaMeasurementId =
-        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
+      const _gaMeasurementId =
+        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-      if (!gaMeasurementId) {
+      if (!_gaMeasurementId) {
         return;
       }
 
-      pageView({ path: url.toString() }, gaMeasurementId);
+      pageView({ path: url.toString() }, _gaMeasurementId);
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
