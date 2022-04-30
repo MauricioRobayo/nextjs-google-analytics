@@ -2,7 +2,7 @@ import React from "react";
 import Script, { ScriptProps } from "next/script";
 
 export function GoogleAnalytics({
-  strategy,
+  strategy = "afterInteractive",
 }: {
   strategy?: ScriptProps["strategy"];
 }): JSX.Element | null {
