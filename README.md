@@ -220,6 +220,10 @@ const App = ({ Component, pageProps }) => {
 export default App;
 ```
 
+## Debugging you Google Analytics
+
+Install the [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna)
+
 ## TypeScript
 
 The module is written in TypeScript and type definitions are included.
