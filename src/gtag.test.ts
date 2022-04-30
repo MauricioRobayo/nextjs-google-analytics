@@ -1,4 +1,4 @@
-import { event, pageView, missingGtagMsg } from "./gtag";
+import { event, pageView } from "./gtag";
 
 const OLD_ENV = process.env;
 const mockGaMeasurementId = "mock";
@@ -29,18 +29,6 @@ describe("event", () => {
     event(mockEvent);
 
     expect(window.gtag).not.toBeCalled();
-  });
-
-  it("should log a warning if measurement id is set but gtag is not available", () => {
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = mockGaMeasurementId;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    window.gtag = undefined as any;
-
-    event(mockEvent);
-
-    expect(console.warn).toBeCalledTimes(1);
-    expect(console.warn).toBeCalledWith(missingGtagMsg);
   });
 
   describe("options", () => {
@@ -117,18 +105,6 @@ describe("pageView", () => {
     pageView();
 
     expect(window.gtag).not.toBeCalled();
-  });
-
-  it("should log a warning if measurement id is set but gtag is not available", () => {
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = mockGaMeasurementId;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    window.gtag = undefined as any;
-
-    pageView();
-
-    expect(console.warn).toBeCalledTimes(1);
-    expect(console.warn).toBeCalledWith(missingGtagMsg);
   });
 
   describe("options", () => {

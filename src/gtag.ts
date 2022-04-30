@@ -1,8 +1,3 @@
-// https://github.com/vercel/next.js/blob/master/examples/with-google-analytics/lib/gtag.js
-
-export const missingGtagMsg =
-  "Gtag is missing. Add the `GoogleAnalytics` component to the `Head` component inside `_document.js`.";
-
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 type PageViewOptions = {
   title?: string;
@@ -18,12 +13,7 @@ export function pageView({
 }: PageViewOptions = {}): void {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-  if (!gaMeasurementId) {
-    return;
-  }
-
-  if (!window.gtag) {
-    console.warn(missingGtagMsg);
+  if (!gaMeasurementId || !window.gtag) {
     return;
   }
 
@@ -66,12 +56,7 @@ export function event(
 ): void {
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-  if (!gaMeasurementId) {
-    return;
-  }
-
-  if (!window.gtag) {
-    console.warn(missingGtagMsg);
+  if (!gaMeasurementId || !window.gtag) {
     return;
   }
 
