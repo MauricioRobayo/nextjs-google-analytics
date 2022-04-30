@@ -220,16 +220,6 @@ const App = ({ Component, pageProps }) => {
 export default App;
 ```
 
-If you are using TypeScript, you can import `NextWebVitalsMetric` from `next/app`:
-
-```ts
-import type { NextWebVitalsMetric } from "next/app";
-
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  // ...
-}
-```
-
 ## TypeScript
 
 The module is written in TypeScript and type definitions are included.
