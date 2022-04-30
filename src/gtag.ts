@@ -17,8 +17,6 @@ export function pageView({
     return;
   }
 
-  // misleading
-
   const pageViewOptions: {
     page_title?: string;
     page_location?: string;
