@@ -222,7 +222,15 @@ export default App;
 
 ## Debugging you Google Analytics
 
-Install the [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna)
+1. Install the [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna).
+2. Turn it on by clicking its icon to the right of the address bar.
+3. Open the Chrome Javascript console to see the messages.
+
+   On Windows and Linux, press Control-Shift-J.
+
+   On Mac, press Command-Option-J.
+
+4. Refresh the page you are on.
 
 ## TypeScript
 
