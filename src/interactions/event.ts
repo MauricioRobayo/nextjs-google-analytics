@@ -9,9 +9,11 @@ type EventOptions = {
 
 export function event(
   action: string,
-  { category, label, value, nonInteraction }: EventOptions = {}
+  { category, label, value, nonInteraction }: EventOptions = {},
+  measurementId?: string
 ): void {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
 
   if (!gaMeasurementId || !window.gtag) {
     return;

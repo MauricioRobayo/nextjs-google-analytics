@@ -7,13 +7,12 @@ type PageViewOptions = {
   sendPageView?: boolean;
 };
 
-export function pageView({
-  title,
-  location,
-  path,
-  sendPageView,
-}: PageViewOptions = {}): void {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+export function pageView(
+  { title, location, path, sendPageView }: PageViewOptions = {},
+  measurementId?: string
+): void {
+  const gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
 
   if (!gaMeasurementId || !window.gtag) {
     return;

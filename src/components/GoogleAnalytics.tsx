@@ -1,12 +1,17 @@
 import React from "react";
 import Script, { ScriptProps } from "next/script";
 
-export function GoogleAnalytics({
-  strategy = "afterInteractive",
-}: {
+type GoogleAnalyticsProps = {
+  measurementId?: string;
   strategy?: ScriptProps["strategy"];
-}): JSX.Element | null {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+};
+
+export function GoogleAnalytics({
+  measurementId,
+  strategy = "afterInteractive",
+}: GoogleAnalyticsProps): JSX.Element | null {
+  const gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
 
   if (!gaMeasurementId) {
     return null;
