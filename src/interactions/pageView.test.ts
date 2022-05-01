@@ -21,6 +21,7 @@ describe("pageView", () => {
   const mockLocation = "mock location";
   const mockPath = "mock category";
   const mockSendPageView = true;
+  const mockUserId = "mock user id";
 
   it("should not call gtag if measurement id is not set", () => {
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = undefined;
@@ -39,6 +40,7 @@ describe("pageView", () => {
         location: mockLocation,
         path: mockPath,
         sendPageView: mockSendPageView,
+        userId: mockUserId,
       });
 
       expect(window.gtag).toBeCalledTimes(1);
@@ -47,6 +49,7 @@ describe("pageView", () => {
         page_location: mockLocation,
         page_path: mockPath,
         send_page_view: mockSendPageView,
+        user_id: mockUserId,
       });
     });
 
@@ -102,6 +105,17 @@ describe("pageView", () => {
       expect(window.gtag).toBeCalledTimes(1);
       expect(window.gtag).toHaveBeenCalledWith("config", mockGaMeasurementId, {
         send_page_view: mockSendPageView,
+      });
+    });
+
+    it("should call gtag with user_id when userId", () => {
+      pageView({
+        userId: mockUserId,
+      });
+
+      expect(window.gtag).toBeCalledTimes(1);
+      expect(window.gtag).toHaveBeenCalledWith("config", mockGaMeasurementId, {
+        user_id: mockUserId,
       });
     });
   });

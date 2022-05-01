@@ -5,16 +5,17 @@ type PageViewOptions = {
   location?: string;
   path?: string;
   sendPageView?: boolean;
+  userId?: string;
 };
 
 export function pageView(
-  { title, location, path, sendPageView }: PageViewOptions = {},
-  gaMeasurementId?: string
+  { title, location, path, sendPageView, userId }: PageViewOptions = {},
+  measurementId?: string
 ): void {
-  const _gaMeasurementId =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
+  const gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
 
-  if (!_gaMeasurementId || !window.gtag) {
+  if (!gaMeasurementId || !window.gtag) {
     return;
   }
 
@@ -23,6 +24,7 @@ export function pageView(
     page_location?: string;
     page_path?: string;
     send_page_view?: boolean;
+    user_id?: string;
   } = {};
 
   if (title !== undefined) {
@@ -41,5 +43,9 @@ export function pageView(
     pageViewOptions.send_page_view = sendPageView;
   }
 
-  window.gtag("config", _gaMeasurementId, pageViewOptions);
+  if (userId !== undefined) {
+    pageViewOptions.user_id = userId;
+  }
+
+  window.gtag("config", gaMeasurementId, pageViewOptions);
 }

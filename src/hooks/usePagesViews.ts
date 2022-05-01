@@ -10,10 +10,6 @@ export function usePagesViews(gaMeasurementId?: string): void {
       const _gaMeasurementId =
         process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-      if (!_gaMeasurementId) {
-        return;
-      }
-
       pageView({ path: url.toString() }, _gaMeasurementId);
     };
 

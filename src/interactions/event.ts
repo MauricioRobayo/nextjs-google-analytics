@@ -5,11 +5,12 @@ type EventOptions = {
   label?: string;
   value?: number;
   nonInteraction?: boolean;
+  userId?: string;
 };
 
 export function event(
   action: string,
-  { category, label, value, nonInteraction }: EventOptions = {},
+  { category, label, value, nonInteraction, userId }: EventOptions = {},
   gaMeasurementId?: string
 ): void {
   const _gaMeasurementId =
@@ -24,6 +25,7 @@ export function event(
     event_label?: string;
     value?: number;
     non_interaction?: boolean;
+    user_id?: string;
   } = {};
 
   if (category !== undefined) {
@@ -40,6 +42,10 @@ export function event(
 
   if (nonInteraction !== undefined) {
     eventOptions.non_interaction = nonInteraction;
+  }
+
+  if (userId !== undefined) {
+    eventOptions.user_id = userId;
   }
 
   window.gtag("event", action, eventOptions);
