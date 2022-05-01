@@ -7,11 +7,11 @@ type GoogleAnalyticsProps = {
 };
 
 export function GoogleAnalytics({
-  gaMeasurementId: measurementId,
+  gaMeasurementId,
   strategy = "afterInteractive",
 }: GoogleAnalyticsProps): JSX.Element | null {
   const _gaMeasurementId =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
   if (!_gaMeasurementId) {
     return null;
