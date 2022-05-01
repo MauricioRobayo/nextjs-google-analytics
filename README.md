@@ -31,6 +31,10 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID="G-XXXXXXXXXX"
 
 to your `.env.local` file.
 
+As an alternative, you can use the `gaMeasurementId` param to pass your _Google Analytics measurement id_.
+
+The `NEXT_PUBLIC_GA_MEASUREMENT_ID` environment variable will take precedence over the `gaMeasurementId` param, so if both are set with different values, the environment variable will override the param.
+
 ## Scripts
 
 Use the `GoogleAnalytics` component to load the gtag scripts. You can add it to a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component and this will take care of including the necessary scripts for every page (or you could add it on a per page basis if you need more control):
@@ -175,6 +179,58 @@ export function reportWebVitals(metric: NextWebVitalsMetric) {
   // ...
 }
 ```
+
+## Using the `gaMeasurementId` param
+
+All exported components, hooks, and functions, accept an optional `gaMeasurementId` param that can be used in case no environment variable is provided:
+
+```js
+// pages/_app.js
+import { GoogleAnalytics, event } from "nextjs-google-analytics";
+import { gaMeasurementId } from "./lib/gtag'
+
+export function reportWebVitals({
+  id,
+  name,
+  label,
+  value,
+}: NextWebVitalsMetric) {
+  event(
+    name,
+    {
+      category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+      value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
+      label: id, // id unique to current page load
+      nonInteraction: true, // avoids affecting bounce rate.
+    },
+    gaMeasurementId
+  );
+}
+const App = ({ Component, pageProps }) => {
+  usePagesViews(gaMeasurementId);
+
+  return (
+    <>
+      <GoogleAnalytics gaMeasurementId={gaMeasurementId} />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
+## Debugging you Google Analytics
+
+1. Install the [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna).
+2. Turn it on by clicking its icon to the right of the address bar.
+3. Open the Chrome Javascript console to see the messages.
+
+   On Windows and Linux, press Control-Shift-J.
+
+   On Mac, press Command-Option-J.
+
+4. Refresh the page you are on.
 
 ## TypeScript
 

@@ -1,17 +1,20 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { pageView } from "./gtag";
+import { pageView } from "../interactions";
 
-export function usePagesViews(): void {
+export function usePagesViews(gaMeasurementId?: string): void {
   const router = useRouter();
 
   useEffect(() => {
     const handleRouteChange = (url: URL): void => {
-      if (!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
+      const _gaMeasurementId =
+        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
+
+      if (!_gaMeasurementId) {
         return;
       }
 
-      pageView({ path: url.toString() });
+      pageView({ path: url.toString() }, _gaMeasurementId);
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
