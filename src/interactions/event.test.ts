@@ -21,6 +21,7 @@ const mockCategory = "mock category";
 const mockLabel = "mock label";
 const mockValue = 1;
 const mockNonInteraction = true;
+const mockUserId = "mock user id";
 
 it("should not call gtag if measurement id is not set", () => {
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = undefined;
@@ -39,6 +40,7 @@ describe("options", () => {
       label: mockLabel,
       value: mockValue,
       nonInteraction: mockNonInteraction,
+      userId: mockUserId,
     });
 
     expect(window.gtag).toBeCalledTimes(1);
@@ -47,6 +49,7 @@ describe("options", () => {
       event_label: mockLabel,
       value: mockValue,
       non_interaction: mockNonInteraction,
+      user_id: mockUserId,
     });
   });
 
@@ -87,6 +90,17 @@ describe("options", () => {
     expect(window.gtag).toBeCalledTimes(1);
     expect(window.gtag).toHaveBeenCalledWith("event", mockEvent, {
       value: mockValue,
+    });
+  });
+
+  it("should call gtag with user_id when user_id given", () => {
+    event(mockEvent, {
+      userId: mockUserId,
+    });
+
+    expect(window.gtag).toBeCalledTimes(1);
+    expect(window.gtag).toHaveBeenCalledWith("event", mockEvent, {
+      user_id: mockUserId,
     });
   });
 });
