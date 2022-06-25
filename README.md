@@ -187,7 +187,7 @@ All exported components, hooks, and functions, accept an optional `gaMeasurement
 ```js
 // pages/_app.js
 import { GoogleAnalytics, event } from "nextjs-google-analytics";
-import { gaMeasurementId } from "./lib/gtag'
+import { gaMeasurementId } from "./lib/gtag";
 
 export function reportWebVitals({
   id,
