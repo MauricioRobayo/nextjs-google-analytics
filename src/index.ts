@@ -1,3 +1,3 @@
 export { GoogleAnalytics } from "./components";
-export { usePagesViews } from "./hooks";
+export { usePagesViews, usePageViews } from "./hooks";
 export { pageView, event } from "./interactions";

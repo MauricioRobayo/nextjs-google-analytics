@@ -77,14 +77,14 @@ export default App;
 
 ## Page views
 
-To track all pages views, call the `usePagesViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:
+To track all pages views, call the `usePageViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:
 
 ```js
 // pages/_app.js
-import { GoogleAnalytics, usePagesViews } from "nextjs-google-analytics";
+import { GoogleAnalytics, usePageViews } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
-  usePagesViews();
+  usePageViews();
 
   return (
     <>
@@ -207,7 +207,7 @@ export function reportWebVitals({
   );
 }
 const App = ({ Component, pageProps }) => {
-  usePagesViews(gaMeasurementId);
+  usePageViews(gaMeasurementId);
 
   return (
     <>
