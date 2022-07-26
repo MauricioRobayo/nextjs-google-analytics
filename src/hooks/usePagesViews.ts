@@ -1,9 +1,9 @@
-import { usePageViews, usePageViewsOptions } from "./usePageViews";
+import { usePageViews, UsePageViewsOptions } from "./usePageViews";
 
 /**
  *
  * @deprecated Use usePageViews instead
  */
-export function usePagesViews(options?: usePageViewsOptions): void {
+export function usePagesViews(options?: UsePageViewsOptions): void {
   usePageViews(options);
 }

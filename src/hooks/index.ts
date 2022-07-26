@@ -1,2 +1,2 @@
 export { usePagesViews } from "./usePagesViews";
-export { usePageViews } from "./usePageViews";
+export { usePageViews, UsePageViewsOptions } from "./usePageViews";
