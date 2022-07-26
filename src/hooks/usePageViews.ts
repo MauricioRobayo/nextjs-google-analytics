@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { pageView } from "../interactions";
 
-interface usePageViewsOptions {
+export interface usePageViewsOptions {
   gaMeasurementId?: string;
   enableHashChange?: boolean;
 }
 
-export function usePageViews({ gaMeasurementId, enableHashChange }: usePageViewsOptions): void {
+export function usePageViews({ gaMeasurementId, enableHashChange }: usePageViewsOptions = {}): void {
   const router = useRouter();
 
   useEffect(() => {
