@@ -1,6 +1,7 @@
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 
-type EventOptions = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type EventOptions = Record<string, any> & {
   category?: string;
   label?: string;
   value?: number;
@@ -10,7 +11,7 @@ type EventOptions = {
 
 export function event(
   action: string,
-  { category, label, value, nonInteraction, userId }: EventOptions = {},
+  { category, label, value, nonInteraction, userId, ...otherOptions }: EventOptions = {},
   gaMeasurementId?: string
 ): void {
   const _gaMeasurementId =
@@ -20,13 +21,14 @@ export function event(
     return;
   }
 
-  const eventOptions: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const eventOptions: Record<string, any> & {
     event_category?: string;
     event_label?: string;
     value?: number;
     non_interaction?: boolean;
     user_id?: string;
-  } = {};
+  } = { ...otherOptions };
 
   if (category !== undefined) {
     eventOptions.event_category = category;
