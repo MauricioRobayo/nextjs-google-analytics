@@ -6,11 +6,11 @@ type EventOptions = {
   value?: number;
   nonInteraction?: boolean;
   userId?: string;
-};
+} & Record<string, any>;
 
 export function event(
   action: string,
-  { category, label, value, nonInteraction, userId }: EventOptions = {},
+  { category, label, value, nonInteraction, userId, ...otherOptions }: EventOptions = {},
   gaMeasurementId?: string
 ): void {
   const _gaMeasurementId =
@@ -26,7 +26,7 @@ export function event(
     value?: number;
     non_interaction?: boolean;
     user_id?: string;
-  } = {};
+  } & Record<string, any> = { ...otherOptions };
 
   if (category !== undefined) {
     eventOptions.event_category = category;
