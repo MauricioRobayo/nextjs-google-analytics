@@ -1,6 +1,6 @@
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 
-// eslint-disable-next-line no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EventOptions = Record<string, any> & {
   category?: string;
   label?: string;
@@ -21,7 +21,7 @@ export function event(
     return;
   }
 
-  // eslint-disable-next-line no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const eventOptions: Record<string, any> & {
     event_category?: string;
     event_label?: string;
