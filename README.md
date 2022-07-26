@@ -207,7 +207,7 @@ export function reportWebVitals({
   );
 }
 const App = ({ Component, pageProps }) => {
-  usePageViews(gaMeasurementId);
+  usePageViews({ gaMeasurementId });
 
   return (
     <>
