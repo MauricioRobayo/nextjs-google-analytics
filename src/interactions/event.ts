@@ -1,12 +1,13 @@
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
 
-type EventOptions = {
+// eslint-disable-next-line no-explicit-any
+type EventOptions = Record<string, any> & {
   category?: string;
   label?: string;
   value?: number;
   nonInteraction?: boolean;
   userId?: string;
-} & Record<string, any>;
+};
 
 export function event(
   action: string,
@@ -20,13 +21,14 @@ export function event(
     return;
   }
 
-  const eventOptions: {
+  // eslint-disable-next-line no-explicit-any
+  const eventOptions: Record<string, any> & {
     event_category?: string;
     event_label?: string;
     value?: number;
     non_interaction?: boolean;
     user_id?: string;
-  } & Record<string, any> = { ...otherOptions };
+  } = { ...otherOptions };
 
   if (category !== undefined) {
     eventOptions.event_category = category;
