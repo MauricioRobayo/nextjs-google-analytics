@@ -2,7 +2,12 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { pageView } from "../interactions";
 
-export function usePageViews(gaMeasurementId?: string): void {
+interface usePageViewsOptions {
+  gaMeasurementId?: string;
+  enableHashChange?: boolean;
+}
+
+export function usePageViews({ gaMeasurementId, enableHashChange }: usePageViewsOptions): void {
   const router = useRouter();
 
   useEffect(() => {
@@ -14,11 +19,17 @@ export function usePageViews(gaMeasurementId?: string): void {
     };
 
     router.events.on("routeChangeComplete", handleRouteChange);
-    router.events.on('hashChangeComplete', handleRouteChange);
+    
+    if (enableHashChange) {
+      router.events.on('hashChangeComplete', handleRouteChange);
+    }
 
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
-      router.events.off('hashChangeComplete', handleRouteChange);
+
+      if (enableHashChange) {
+        router.events.off('hashChangeComplete', handleRouteChange);
+      }
     };
-  }, [router.events]);
+  }, [router.events, gaMeasurementId, enableHashChange]);
 }
