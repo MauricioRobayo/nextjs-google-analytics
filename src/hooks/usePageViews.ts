@@ -11,7 +11,7 @@ export interface UsePageViewsOptions {
 export function usePageViews({
   gaMeasurementId,
   ignoreHashChange,
-  disabled = false,
+  disabled,
 }: UsePageViewsOptions = {}): void {
   const router = useRouter();
 
