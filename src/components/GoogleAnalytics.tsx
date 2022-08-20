@@ -1,14 +1,20 @@
 import React from "react";
 import Script, { ScriptProps } from "next/script";
+import { usePageViews } from "../hooks";
 
 type GoogleAnalyticsProps = {
   gaMeasurementId?: string;
   strategy?: ScriptProps["strategy"];
+  pageViews?: {
+    enabled: boolean;
+    ignoreHashChange?: boolean;
+  };
 };
 
 export function GoogleAnalytics({
   gaMeasurementId,
   strategy = "afterInteractive",
+  pageViews,
 }: GoogleAnalyticsProps): JSX.Element | null {
   const _gaMeasurementId =
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
@@ -16,6 +22,12 @@ export function GoogleAnalytics({
   if (!_gaMeasurementId) {
     return null;
   }
+
+  usePageViews({
+    gaMeasurementId,
+    ignoreHashChange: pageViews?.ignoreHashChange,
+    disabled: !pageViews?.enabled,
+  });
 
   return (
     <>
