@@ -135,7 +135,7 @@ const App = ({ Component, pageProps }) => {
 export default App;
 ```
 
-As an alternative, you can directly call the `usePageViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, make sure not to enable `trackPageViews` prop on the `GoogleAnalytics` component:
+As an alternative, you can directly call the `usePageViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, **do not set `trackPageViews` prop on the `GoogleAnalytics` component** or set it to false (default):
 
 ```js
 // pages/_app.js
@@ -147,7 +147,7 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <>
-      <GoogleAnalytics />
+      <GoogleAnalytics /> {/* or <GoogleAnalytics trackPageViews={false} /> */}
       <Component {...pageProps} />
     </>
   );
