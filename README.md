@@ -14,6 +14,28 @@ This package optimizes script loading using [Next.js `Script` tag](https://nextj
 npm install --save nextjs-google-analytics
 ```
 
+## TL;DR
+
+Add the `GoogleAnalytics` component with the `trackPageViews` prop set to `true` to your [custom App](https://nextjs.org/docs/advanced-features/custom-app) file:
+
+```js
+// pages/_app.js
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
+const App = ({ Component, pageProps }) => {
+  return (
+    <>
+      <GoogleAnalytics trackPageViews />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
+You can pass your _Google Analytics measurement id_ by setting it on the `NEXT_PUBLIC_GA_MEASUREMENT_ID` environment variable or using the `gaMeasurementId` prop on the `GoogleAnalytics` component. **The environment variable will override the prop if both are set**.
+
 ## Usage
 
 Your _Google Analytics measurement id_ is read from `NEXT_PUBLIC_GA_MEASUREMENT_ID` environment variable, so make sure it is set in your production environment:
@@ -77,18 +99,55 @@ export default App;
 
 ## Page views
 
-To track all pages views, call the `usePageViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, make sure to include the necessary gtag scripts with the `GoogleAnalytics` component:
+To track page views set the `trackPageViews` prop of the `GoogleAnalytics` component to true.
+
+```js
+// pages/_app.js
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
+const App = ({ Component, pageProps }) => {
+  return (
+    <>
+      <GoogleAnalytics trackPageViews />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
+By default it will be trigger on hash changes if `trackPageViews` is enabled, but you can ignore hash changes by providing an object to the `trackPageViews` prop:
+
+```js
+// pages/_app.js
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
+const App = ({ Component, pageProps }) => {
+  return (
+    <>
+      <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
+As an alternative, you can directly call the `usePageViews` hook inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component, **do not set `trackPageViews` prop on the `GoogleAnalytics` component** or set it to false (default):
 
 ```js
 // pages/_app.js
 import { GoogleAnalytics, usePageViews } from "nextjs-google-analytics";
 
 const App = ({ Component, pageProps }) => {
-  usePageViews();
+  usePageViews(); // IgnoreHashChange defaults to false
+  // usePageViews({ ignoreHashChange: true });
 
   return (
     <>
-      <GoogleAnalytics />
+      <GoogleAnalytics /> {/* or <GoogleAnalytics trackPageViews={false} /> */}
       <Component {...pageProps} />
     </>
   );

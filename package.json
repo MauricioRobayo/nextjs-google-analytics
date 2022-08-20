@@ -23,6 +23,7 @@
   "author": "Mauricio Robayo",
   "license": "MIT",
   "devDependencies": {
+    "@testing-library/react": "^13.3.0",
     "@types/gtag.js": "^0.0.10",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.8",
@@ -57,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/MauricioRobayo/nextjs-google-analytics/issues"
   },
-  "homepage": "https://github.com/MauricioRobayo/nextjs-google-analytics#readme"
+  "homepage": "https://github.com/MauricioRobayo/nextjs-google-analytics#readme",
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  }
 }
