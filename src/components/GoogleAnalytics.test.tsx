@@ -35,6 +35,16 @@ describe("GoogleAnalytics", () => {
     expect(mockEventOn).not.toBeCalled();
   });
 
+  it("should disable usePageViews if trackPageViews is set to false", () => {
+    render(<GoogleAnalytics trackPageViews={false} />);
+    expect(usePageViewsSpy).toBeCalledWith({
+      disabled: true,
+      gaMeasurementId: undefined,
+      ignoreHashChange: false,
+    });
+    expect(mockEventOn).not.toBeCalled();
+  });
+
   it("should call usePageViews with gaMeasurementId", () => {
     render(<GoogleAnalytics gaMeasurementId="1234" />);
     expect(usePageViewsSpy).toBeCalledWith({
@@ -83,6 +93,22 @@ describe("GoogleAnalytics", () => {
   it("should enable usePageViews and ignoreHashChange with gaMeasurementId from env", () => {
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = "1234";
     render(<GoogleAnalytics trackPageViews={{ ignoreHashChange: false }} />);
+    expect(usePageViewsSpy).toBeCalledWith({
+      disabled: false,
+      gaMeasurementId: "1234",
+      ignoreHashChange: false,
+    });
+    expect(mockEventOn).toBeCalled();
+  });
+
+  it("should override param if env is used", () => {
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = "1234";
+    render(
+      <GoogleAnalytics
+        trackPageViews={{ ignoreHashChange: false }}
+        gaMeasurementId="5678"
+      />
+    );
     expect(usePageViewsSpy).toBeCalledWith({
       disabled: false,
       gaMeasurementId: "1234",
