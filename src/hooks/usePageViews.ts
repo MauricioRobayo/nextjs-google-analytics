@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { Router } from "next/router";
 import { pageView } from "../interactions";
 
 export interface UsePageViewsOptions {
@@ -13,8 +13,6 @@ export function usePageViews({
   ignoreHashChange,
   disabled,
 }: UsePageViewsOptions = {}): void {
-  const router = useRouter();
-
   useEffect(() => {
     if (disabled) {
       return;
@@ -27,18 +25,18 @@ export function usePageViews({
       pageView({ path: url.toString() }, _gaMeasurementId);
     };
 
-    router.events.on("routeChangeComplete", handleRouteChange);
+    Router.events.on("routeChangeComplete", handleRouteChange);
 
     if (!ignoreHashChange) {
-      router.events.on("hashChangeComplete", handleRouteChange);
+      Router.events.on("hashChangeComplete", handleRouteChange);
     }
 
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
+      Router.events.off("routeChangeComplete", handleRouteChange);
 
       if (!ignoreHashChange) {
-        router.events.off("hashChangeComplete", handleRouteChange);
+        Router.events.off("hashChangeComplete", handleRouteChange);
       }
     };
-  }, [router.events, gaMeasurementId, ignoreHashChange]);
+  }, [Router.events, gaMeasurementId, ignoreHashChange]);
 }
