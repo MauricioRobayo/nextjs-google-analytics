@@ -4,6 +4,7 @@ import { usePageViews } from "../hooks";
 
 type GoogleAnalyticsProps = {
   gaMeasurementId?: string;
+  gtagUrl?: string;
   strategy?: ScriptProps["strategy"];
 };
 
@@ -19,6 +20,7 @@ type WithIgnoreHashChange = GoogleAnalyticsProps & {
 
 export function GoogleAnalytics({
   gaMeasurementId,
+  gtagUrl = "https://www.googletagmanager.com/gtag/js",
   strategy = "afterInteractive",
   trackPageViews,
 }: WithPageView | WithIgnoreHashChange): JSX.Element | null {
@@ -41,7 +43,7 @@ export function GoogleAnalytics({
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${_gaMeasurementId}`}
+        src={`${gtagUrl}?id=${_gaMeasurementId}`}
         strategy={strategy}
       />
       <Script id="nextjs-google-analytics">
