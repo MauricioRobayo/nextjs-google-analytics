@@ -1,19 +1,17 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { GoogleAnalytics } from "./GoogleAnalytics";
+import { Router } from "next/router";
 import * as hooks from "../hooks";
 
-const mockEventOn = jest.fn();
 jest.mock("next/router", () => {
   return {
     ...jest.requireActual("next/router"),
-    useRouter: () => {
-      return {
-        events: {
-          on: mockEventOn,
-          off: () => null,
-        },
-      };
+    Router: {
+      events: {
+        on: jest.fn(),
+        off: () => null,
+      },
     },
   };
 });
@@ -32,7 +30,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: undefined,
       ignoreHashChange: false,
     });
-    expect(mockEventOn).not.toBeCalled();
+    expect(Router.events.on).not.toBeCalled();
   });
 
   it("should disable usePageViews if trackPageViews is set to false", () => {
@@ -42,7 +40,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: undefined,
       ignoreHashChange: false,
     });
-    expect(mockEventOn).not.toBeCalled();
+    expect(Router.events.on).not.toBeCalled();
   });
 
   it("should call usePageViews with gaMeasurementId", () => {
@@ -52,7 +50,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: "1234",
       ignoreHashChange: false,
     });
-    expect(mockEventOn).not.toBeCalled();
+    expect(Router.events.on).not.toBeCalled();
   });
 
   it("should enable usePageViews if trackPageViews is set", () => {
@@ -62,7 +60,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: undefined,
       ignoreHashChange: false,
     });
-    expect(mockEventOn).toBeCalled();
+    expect(Router.events.on).toBeCalled();
   });
 
   it("should enable usePageViews and ignoreHashChange", () => {
@@ -72,7 +70,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: undefined,
       ignoreHashChange: true,
     });
-    expect(mockEventOn).toBeCalled();
+    expect(Router.events.on).toBeCalled();
   });
 
   it("should enable usePageViews and ignoreHashChange with gaMeasurementId", () => {
@@ -87,7 +85,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: "1234",
       ignoreHashChange: false,
     });
-    expect(mockEventOn).toBeCalled();
+    expect(Router.events.on).toBeCalled();
   });
 
   it("should enable usePageViews and ignoreHashChange with gaMeasurementId from env", () => {
@@ -98,7 +96,7 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: "1234",
       ignoreHashChange: false,
     });
-    expect(mockEventOn).toBeCalled();
+    expect(Router.events.on).toBeCalled();
   });
 
   it("should override param if env is used", () => {
@@ -114,6 +112,6 @@ describe("GoogleAnalytics", () => {
       gaMeasurementId: "1234",
       ignoreHashChange: false,
     });
-    expect(mockEventOn).toBeCalled();
+    expect(Router.events.on).toBeCalled();
   });
 });
