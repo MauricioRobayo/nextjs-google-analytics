@@ -96,6 +96,10 @@ const App = ({ Component, pageProps }) => {
 
 export default App;
 ```
+also, you can use alternative to default path for googletagmanager script by
+```js
+<GoogleAnalytics gtagUrl="/gtag.js" />
+```
 
 ## Page views
 
