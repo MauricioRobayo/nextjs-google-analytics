@@ -17,7 +17,7 @@ export function event(
   const _gaMeasurementId =
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-  if (!_gaMeasurementId || !window.gtag) {
+  if (!_gaMeasurementId || !(window as any).gtag) {
     return;
   }
 
@@ -50,5 +50,5 @@ export function event(
     eventOptions.user_id = userId;
   }
 
-  window.gtag("event", action, eventOptions);
+  (window as any).gtag("event", action, eventOptions);
 }
