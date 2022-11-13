@@ -18,7 +18,7 @@ export function usePageViews({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  var pageViewPath: string | undefined;
+  let pageViewPath: string | undefined;
 
   useEffect(() => {
     if (disabled) {
