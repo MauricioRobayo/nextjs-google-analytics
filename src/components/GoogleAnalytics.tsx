@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Script, { ScriptProps } from "next/script";
 import { usePageViews } from "../hooks";

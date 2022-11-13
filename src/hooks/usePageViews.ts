@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect } from "react";
-import { Router } from "next/router";
+import { usePathname, useSearchParams } from "next/navigation";
 import { pageView } from "../interactions";
 
 export interface UsePageViewsOptions {
@@ -13,30 +15,33 @@ export function usePageViews({
   ignoreHashChange,
   disabled,
 }: UsePageViewsOptions = {}): void {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  var pageViewPath: string | undefined;
+
   useEffect(() => {
     if (disabled) {
       return;
     }
 
-    const handleRouteChange = (url: URL): void => {
-      const _gaMeasurementId =
-        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
-
-      pageView({ path: url.toString() }, _gaMeasurementId);
-    };
-
-    Router.events.on("routeChangeComplete", handleRouteChange);
-
-    if (!ignoreHashChange) {
-      Router.events.on("hashChangeComplete", handleRouteChange);
+    let newPageViewPath: string | undefined;
+    if (pathname) {
+      if (ignoreHashChange) {
+        newPageViewPath = pathname
+      } else {
+        newPageViewPath = pathname + searchParams.toString()
+      }
     }
 
-    return () => {
-      Router.events.off("routeChangeComplete", handleRouteChange);
+    if (newPageViewPath === pageViewPath) {
+      return;
+    } 
+    pageViewPath = newPageViewPath
 
-      if (!ignoreHashChange) {
-        Router.events.off("hashChangeComplete", handleRouteChange);
-      }
-    };
-  }, [Router.events, gaMeasurementId, ignoreHashChange]);
+    const _gaMeasurementId =
+      process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
+
+    pageView({ path: newPageViewPath }, _gaMeasurementId);
+  }, [pathname, searchParams])
 }
