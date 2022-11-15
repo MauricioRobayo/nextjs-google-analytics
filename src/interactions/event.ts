@@ -17,7 +17,7 @@ export function event(
   const _gaMeasurementId =
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-  if (!_gaMeasurementId || !window.gtag) {
+  if (!_gaMeasurementId && !window.gtag) {
     return;
   }
 
