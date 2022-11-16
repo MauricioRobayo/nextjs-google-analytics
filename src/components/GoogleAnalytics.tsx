@@ -6,6 +6,7 @@ type GoogleAnalyticsProps = {
   gaMeasurementId?: string;
   gtagUrl?: string;
   strategy?: ScriptProps["strategy"];
+  debugMode?: boolean;
 };
 
 type WithPageView = GoogleAnalyticsProps & {
@@ -19,6 +20,7 @@ type WithIgnoreHashChange = GoogleAnalyticsProps & {
 };
 
 export function GoogleAnalytics({
+  debugMode = false,
   gaMeasurementId,
   gtagUrl = "https://www.googletagmanager.com/gtag/js",
   strategy = "afterInteractive",
@@ -42,10 +44,7 @@ export function GoogleAnalytics({
 
   return (
     <>
-      <Script
-        src={`${gtagUrl}?id=${_gaMeasurementId}`}
-        strategy={strategy}
-      />
+      <Script src={`${gtagUrl}?id=${_gaMeasurementId}`} strategy={strategy} />
       <Script id="nextjs-google-analytics">
         {`
             window.dataLayer = window.dataLayer || [];
@@ -53,6 +52,7 @@ export function GoogleAnalytics({
             gtag('js', new Date());
             gtag('config', '${_gaMeasurementId}', {
               page_path: window.location.pathname,
+              debug_mode: ${debugMode},
             });
           `}
       </Script>
