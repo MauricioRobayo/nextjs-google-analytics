@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { GoogleAnalytics } from "./GoogleAnalytics";
 import { Router } from "next/router";
 import * as hooks from "../hooks";
@@ -15,6 +15,14 @@ jest.mock("next/router", () => {
     },
   };
 });
+
+jest.mock(
+  "next/script",
+  () =>
+    function MockScript(props: any) {
+      return <div {...props} />;
+    }
+);
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -113,5 +121,15 @@ describe("GoogleAnalytics", () => {
       ignoreHashChange: false,
     });
     expect(Router.events.on).toBeCalled();
+  });
+
+  it("should default to a debug_mode of false", () => {
+    render(<GoogleAnalytics gaMeasurementId="1234" />);
+    expect(screen.queryByText(/debug_mode: false/)).not.toBeNull();
+  });
+
+  it("should have a debug_mode of true when the debugMode prop is set", () => {
+    render(<GoogleAnalytics gaMeasurementId="1234" debugMode />);
+    expect(screen.queryByText(/debug_mode: true/)).not.toBeNull();
   });
 });
