@@ -1,7 +1,6 @@
 import { pageView } from "./pageView";
 
 const OLD_ENV = process.env;
-const mockGaMeasurementId = "mock";
 
 beforeEach(() => {
   console.warn = jest.fn();
@@ -23,17 +22,7 @@ describe("pageView", () => {
   const mockSendPageView = true;
   const mockUserId = "mock user id";
 
-  it("should not call gtag if measurement id is not set", () => {
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = undefined;
-
-    pageView();
-
-    expect(window.gtag).not.toBeCalled();
-  });
-
   describe("options", () => {
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID = mockGaMeasurementId;
-
     it("should call gtag with all the options", () => {
       pageView({
         title: mockTitle,
