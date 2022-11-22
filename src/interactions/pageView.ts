@@ -10,12 +10,8 @@ type PageViewOptions = {
 
 export function pageView(
   { title, location, path, sendPageView, userId }: PageViewOptions = {},
-  measurementId?: string
 ): void {
-  const gaMeasurementId =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
-
-  if (!gaMeasurementId && !window.gtag) {
+  if (!window.gtag) {
     return;
   }
 
