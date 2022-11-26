@@ -19,7 +19,7 @@ jest.mock("next/router", () => {
 jest.mock(
   "next/script",
   () =>
-    function MockScript(props: any) {
+    function MockScript(props: React.HTMLAttributes<HTMLDivElement>) {
       return <div {...props} />;
     }
 );
@@ -123,13 +123,15 @@ describe("GoogleAnalytics", () => {
     expect(Router.events.on).toBeCalled();
   });
 
-  it("should default to a debug_mode of false", () => {
-    render(<GoogleAnalytics gaMeasurementId="1234" />);
-    expect(screen.queryByText(/debug_mode: false/)).not.toBeNull();
-  });
+  describe("debugMode", () => {
+    it("should not have debug_mode when the debugMode prop is not set", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" />);
+      expect(screen.queryByText(/debug_mode:/)).toBeNull();
+    });
 
-  it("should have a debug_mode of true when the debugMode prop is set", () => {
-    render(<GoogleAnalytics gaMeasurementId="1234" debugMode />);
-    expect(screen.queryByText(/debug_mode: true/)).not.toBeNull();
+    it("should have a debug_mode when the debugMode prop is set", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" debugMode />);
+      expect(screen.queryByText(/debug_mode:/)).not.toBeNull();
+    });
   });
 });
