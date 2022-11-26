@@ -19,7 +19,7 @@ jest.mock("next/router", () => {
 jest.mock(
   "next/script",
   () =>
-    function MockScript(props: any) {
+    function MockScript(props: React.HTMLAttributes<HTMLDivElement>) {
       return <div {...props} />;
     }
 );
@@ -135,7 +135,6 @@ describe("GoogleAnalytics", () => {
 
   it("should not have debug_mode when the debugMode prop is set to false", () => {
     render(<GoogleAnalytics gaMeasurementId="1234" />);
-    screen.debug();
     expect(screen.queryByText(/debug_mode:/)).toBeNull();
   });
 });
