@@ -123,13 +123,19 @@ describe("GoogleAnalytics", () => {
     expect(Router.events.on).toBeCalled();
   });
 
-  it("should default to a debug_mode of false", () => {
+  it("should not have debug_mode when the debugMode prop is not set", () => {
     render(<GoogleAnalytics gaMeasurementId="1234" />);
-    expect(screen.queryByText(/debug_mode: false/)).not.toBeNull();
+    expect(screen.queryByText(/debug_mode:/)).toBeNull();
   });
 
-  it("should have a debug_mode of true when the debugMode prop is set", () => {
+  it("should have a debug_mode when the debugMode prop is set", () => {
     render(<GoogleAnalytics gaMeasurementId="1234" debugMode />);
-    expect(screen.queryByText(/debug_mode: true/)).not.toBeNull();
+    expect(screen.queryByText(/debug_mode:/)).not.toBeNull();
+  });
+
+  it("should not have debug_mode when the debugMode prop is set to false", () => {
+    render(<GoogleAnalytics gaMeasurementId="1234" />);
+    screen.debug();
+    expect(screen.queryByText(/debug_mode:/)).toBeNull();
   });
 });

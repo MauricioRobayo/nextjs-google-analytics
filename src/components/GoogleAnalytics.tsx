@@ -52,7 +52,7 @@ export function GoogleAnalytics({
             gtag('js', new Date());
             gtag('config', '${_gaMeasurementId}', {
               page_path: window.location.pathname,
-              debug_mode: ${debugMode},
+              ${debugMode ? `debug_mode: ${debugMode},` : ""}
             });
           `}
       </Script>
