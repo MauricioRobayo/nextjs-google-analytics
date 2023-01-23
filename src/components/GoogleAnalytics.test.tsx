@@ -134,4 +134,22 @@ describe("GoogleAnalytics", () => {
       expect(screen.queryByText(/debug_mode:/)).not.toBeNull();
     });
   });
+
+  describe("defaultConsent", () => {
+    it("should have consent explicitly denied when defaultConsent is set to 'denied'", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" defaultConsent="denied" />);
+      expect(screen.queryByText(/'ad_storage': 'denied'/)).not.toBeNull();
+      expect(screen.queryByText(/'analytics_storage': 'denied'/)).not.toBeNull();
+    });
+
+    it("should not call consent function at all when defaultConsent is set to 'granted'", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" defaultConsent="granted" />);
+      expect(screen.queryByText(/'consent', 'default'/)).toBeNull();
+    });
+
+    it("should not call consent function at all when defaultConsent is omitted", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" />);
+      expect(screen.queryByText(/'consent', 'default'/)).toBeNull();
+    });
+  });
 });
