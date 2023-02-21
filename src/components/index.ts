@@ -1,1 +1,5 @@
-export { GoogleAnalytics } from "./GoogleAnalytics";
+export {
+  GoogleAnalytics,
+  BodyScriptGoogleAnalytics,
+  HeadScriptGoogleAnalytics,
+} from "./GoogleAnalytics";
