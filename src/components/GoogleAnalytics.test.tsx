@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { GoogleAnalytics } from "./GoogleAnalytics";
 import { Router } from "next/router";
 import * as hooks from "../hooks";
@@ -15,6 +15,14 @@ jest.mock("next/router", () => {
     },
   };
 });
+
+jest.mock(
+  "next/script",
+  () =>
+    function MockScript(props: React.HTMLAttributes<HTMLDivElement>) {
+      return <div {...props} />;
+    }
+);
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -113,5 +121,35 @@ describe("GoogleAnalytics", () => {
       ignoreHashChange: false,
     });
     expect(Router.events.on).toBeCalled();
+  });
+
+  describe("debugMode", () => {
+    it("should not have debug_mode when the debugMode prop is not set", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" />);
+      expect(screen.queryByText(/debug_mode:/)).toBeNull();
+    });
+
+    it("should have a debug_mode when the debugMode prop is set", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" debugMode />);
+      expect(screen.queryByText(/debug_mode:/)).not.toBeNull();
+    });
+  });
+
+  describe("defaultConsent", () => {
+    it("should have consent explicitly denied when defaultConsent is set to 'denied'", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" defaultConsent="denied" />);
+      expect(screen.queryByText(/'ad_storage': 'denied'/)).not.toBeNull();
+      expect(screen.queryByText(/'analytics_storage': 'denied'/)).not.toBeNull();
+    });
+
+    it("should not call consent function at all when defaultConsent is set to 'granted'", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" defaultConsent="granted" />);
+      expect(screen.queryByText(/'consent', 'default'/)).toBeNull();
+    });
+
+    it("should not call consent function at all when defaultConsent is omitted", () => {
+      render(<GoogleAnalytics gaMeasurementId="1234" />);
+      expect(screen.queryByText(/'consent', 'default'/)).toBeNull();
+    });
   });
 });
