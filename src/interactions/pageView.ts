@@ -15,7 +15,7 @@ export function pageView(
   const gaMeasurementId =
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? measurementId;
 
-  if (!gaMeasurementId && !window.gtag) {
+  if (!gaMeasurementId || !window.gtag) {
     return;
   }
 
