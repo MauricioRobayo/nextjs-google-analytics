@@ -1,6 +1,7 @@
 import React from "react";
-import Script, { ScriptProps } from "next/script";
-import { usePageViews } from "../hooks";
+import Script, { type ScriptProps } from "next/script";
+import { PageView } from "./PageView";
+import { AppDirPageView } from "./AppDirPageView";
 
 type GoogleAnalyticsProps = {
   gaMeasurementId?: string;
@@ -9,6 +10,7 @@ type GoogleAnalyticsProps = {
   debugMode?: boolean;
   defaultConsent?: "granted" | "denied";
   nonce?: string;
+  appDirectory?: boolean;
 };
 
 type WithPageView = GoogleAnalyticsProps & {
@@ -29,25 +31,30 @@ export function GoogleAnalytics({
   defaultConsent = "granted",
   trackPageViews,
   nonce,
+  appDirectory = false,
 }: WithPageView | WithIgnoreHashChange): JSX.Element | null {
   const _gaMeasurementId =
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
-
-  usePageViews({
-    gaMeasurementId: _gaMeasurementId,
-    ignoreHashChange:
-      typeof trackPageViews === "object"
-        ? trackPageViews?.ignoreHashChange
-        : false,
-    disabled: !trackPageViews,
-  });
 
   if (!_gaMeasurementId) {
     return null;
   }
 
+  const pageViewComponent = appDirectory ? (
+    <AppDirPageView
+      gaMeasurementId={_gaMeasurementId}
+      trackPageViews={trackPageViews}
+    />
+  ) : (
+    <PageView
+      gaMeasurementId={_gaMeasurementId}
+      trackPageViews={trackPageViews}
+    />
+  );
+
   return (
     <>
+      {pageViewComponent}
       <Script src={`${gtagUrl}?id=${_gaMeasurementId}`} strategy={strategy} />
       <Script id="nextjs-google-analytics" nonce={nonce}>
         {`
