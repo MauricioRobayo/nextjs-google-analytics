@@ -14,7 +14,7 @@ type WithIgnoreHashChange = PageViewProps & {
   };
 };
 
-export function AppDirPageView({
+export function AsyncPageView({
   gaMeasurementId,
   trackPageViews,
 }: WithPageView | WithIgnoreHashChange) {
