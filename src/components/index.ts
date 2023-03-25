@@ -1,3 +1,2 @@
 export { GoogleAnalytics } from "./GoogleAnalytics";
-export { PageView } from "./PageView";
-export { AppDirPageView } from "./AppDirPageView";
+export { AsyncGoogleAnalytics } from "./AsyncGoogleAnalytics";
