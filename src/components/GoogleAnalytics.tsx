@@ -55,11 +55,11 @@ export function GoogleAnalytics({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             ${
-              defaultConsent === "denied" &&
+              defaultConsent === "denied" ?
               `gtag('consent', 'default', {
               'ad_storage': 'denied',
               'analytics_storage': 'denied'
-            });`
+            });` : ``
             }
             gtag('config', '${_gaMeasurementId}', {
               page_path: window.location.pathname,
