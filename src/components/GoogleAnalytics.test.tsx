@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { GoogleAnalytics } from "./GoogleAnalytics";
 import { Router } from "next/router";
 import * as hooks from "../hooks";
+import { getConsentCookie } from "../utils";
 
 jest.mock("next/router", () => {
   return {
@@ -151,5 +152,16 @@ describe("GoogleAnalytics", () => {
       render(<GoogleAnalytics gaMeasurementId="1234" />);
       expect(screen.queryByText(/'consent', 'default'/)).toBeNull();
     });
+  });
+
+  describe("consentCookie", () => {
+    it("should return denied for everything if the key is undefined", () => {
+      expect(getConsentCookie(undefined)).toMatchObject({
+        ad_storage: "denied",
+        analytics_storage: "denied",
+      });
+    });
+
+    // TODO getting valid cookies
   });
 });

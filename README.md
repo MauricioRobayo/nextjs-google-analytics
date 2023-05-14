@@ -101,6 +101,120 @@ also, you can use alternative to default path for googletagmanager script by
 <GoogleAnalytics gtagUrl="/gtag.js" />
 ```
 
+## Using Cookies for Consent
+
+To use cookies to track user consent status you can use the `consentCookie` prop on the `GoogleAnalytics` component. If you specify a cookie, we automatically set consent to "denied" on first load.
+
+```js
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
+const App = ({ Component, pageProps }) => {
+  return (
+    <>
+      <GoogleAnalytics consentCookie="ga_consent" />
+      <Component {...pageProps} />
+    </>
+  );
+};
+
+export default App;
+```
+
+This will automatically save consent between sessions and pages.
+
+The cookie is saved as a URI Component encoded JSON object. You can use the `useConsent` helper functions to your build out your consent prompts.
+
+Here's an example:
+
+```js
+import { useConsent } from "nextjs-google-analytics";
+import { consentCookieExists } from "nextjs-google-analytics";
+import { useRef, useEffect } from "react";
+
+const cookieKey = "ga_consent";
+
+export default function Test() {
+  // The the first two variables act the same as useState
+  // The updateConsent function allows you to commit the consent changes
+  const [consent, setConsent, updateConsent] = useConsent({
+    // Here we set the initial values that appear in the consent variable
+    // The cookie is not set to this value until the updateConsent function is
+    // called.
+    // This is also the default value.
+    initialParams: { ad_storage: "denied", analytics_storage: "denied" },
+    // If cookie key isn't specified, changes will only last for that session.
+    preferencesCookieKey: cookieKey,
+  });
+
+  const promptRef = useRef(null);
+
+  // You can use consentCookieExists to only display this when the cookie
+  // doesn't exist here
+  useEffect(() => {
+    if (promptRef.current && consentCookieExists(cookieKey)) {
+      // Apply CSS that hides the consent div for us
+      promptRef.current.style.display = "none";
+      console.log(`A cookie with the key ${cookieKey} exists. (Prompt hidden)`);
+    }
+  }, []);
+
+  return (
+    <div ref={promptRef}>
+      <div>
+        <input
+          type="checkbox"
+          id="ad_storage"
+          onChange={(e) => {
+            let val = e.currentTarget.checked ? "granted" : "denied";
+
+            // Same usage as a useState set function
+            setConsent((prev) => {
+              return { ...prev, ad_storage: val };
+            });
+          }}
+          checked={consent.ad_storage === "granted"}
+        />
+        <label htmlFor="ad_storage">Ad consent</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="analytics_storage"
+          onChange={(e) => {
+            let val = e.currentTarget.checked ? "granted" : "denied";
+
+            setConsent((prev) => {
+              return { ...prev, analytics_storage: val };
+            });
+          }}
+          checked={consent.analytics_storage === "granted"}
+        />
+        <label htmlFor="analytics_storage">Site analytics</label>
+      </div>
+      {/*
+          Using updateConsent without parameters will use the value stored in the
+          consent variable
+      */}
+      <button onClick={() => updateConsent()}>Update settings</button>
+      {/*
+          The updateConsent function can also take any last minute
+          consent changes. This is perfect for an "Accept All" button
+      */}
+      <button
+        onClick={() => {
+          updateConsent({
+            ad_storage: "granted",
+            analytics_storage: "granted",
+          });
+        }}
+      >
+        Accept All
+      </button>
+    </div>
+  );
+}
+```
+
 ## Page views
 
 To track page views set the `trackPageViews` prop of the `GoogleAnalytics` component to true.
