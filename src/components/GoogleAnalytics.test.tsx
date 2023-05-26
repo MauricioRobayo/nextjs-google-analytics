@@ -124,6 +124,7 @@ describe("GoogleAnalytics", () => {
   });
   it('should not throw an error when no process.env exists', () => {
     // These tests run in node however this component will also be rendered on the browser.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     process.env = undefined
     render(
@@ -138,6 +139,7 @@ describe("GoogleAnalytics", () => {
   })
   it('should work with the prop when no process.env exists', () => {
     // These tests run in node however this component will also be rendered on the browser.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     process.env = undefined
     render(
