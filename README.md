@@ -204,6 +204,22 @@ export function Contact() {
 }
 ```
 
+## Consent
+
+You can use the `consent` function to update your users' cookie preferences (GDPR).
+
+```js
+ const consentValue: 'denied' | 'granted' = getUserCookiePreferenceFromLocalStorage(); // 'denied' or 'granted'
+ 
+ consent({
+    arg: 'update',
+    params: {
+      ad_storage: consentValue,
+      analytics_storage: consentValue,
+    },
+ });
+```
+
 ## Web Vitals
 
 To send [Next.js web vitals](https://nextjs.org/docs/advanced-features/measuring-performance#sending-results-to-analytics) to Google Analytics you can use a custom event on the `reportWebVitals` function inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component:
