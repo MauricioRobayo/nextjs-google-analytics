@@ -206,7 +206,7 @@ export function Contact() {
 
 For the possible parameters that can be specified in the `event`, please refer to the `event` command in the Google tag API reference.
 
-- [Google tag API reference](https://developers.google.com/tag-platform/gtagjs/reference#event)
+- [Google tag API reference - event](https://developers.google.com/tag-platform/gtagjs/reference#event)
 
 ## Consent
 
