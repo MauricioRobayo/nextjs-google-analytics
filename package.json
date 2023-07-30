@@ -63,5 +63,8 @@
   "homepage": "https://github.com/MauricioRobayo/nextjs-google-analytics#readme",
   "optionalDependencies": {
     "fsevents": "^2.3.2"
+  },
+  "release": {
+    "branches": "main"
   }
 }
