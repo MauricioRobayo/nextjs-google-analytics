@@ -204,6 +204,30 @@ export function Contact() {
 }
 ```
 
+For the possible parameters that can be specified in the `event`, please refer to the `event` command in the Google tag API reference.
+
+- [Google tag API reference - event](https://developers.google.com/tag-platform/gtagjs/reference#event)
+
+## Consent
+
+You can use the `consent` function to update your users' cookie preferences (GDPR).
+
+```js
+ const consentValue: 'denied' | 'granted' = getUserCookiePreferenceFromLocalStorage(); // 'denied' or 'granted'
+ 
+ consent({
+    arg: 'update',
+    params: {
+      ad_storage: consentValue,
+      analytics_storage: consentValue,
+    },
+ });
+```
+
+For the possible values that can be specified in `arg` and `params`, please refer to the `consent` command in the Google tag API reference.
+
+- [Google tag API reference - consent](https://developers.google.com/tag-platform/gtagjs/reference#consent)
+
 ## Web Vitals
 
 To send [Next.js web vitals](https://nextjs.org/docs/advanced-features/measuring-performance#sending-results-to-analytics) to Google Analytics you can use a custom event on the `reportWebVitals` function inside a [custom App](https://nextjs.org/docs/advanced-features/custom-app) component:
