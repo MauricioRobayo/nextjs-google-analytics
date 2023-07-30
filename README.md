@@ -204,6 +204,10 @@ export function Contact() {
 }
 ```
 
+For the possible parameters that can be specified in the `event`, please refer to the `event` command in the Google tag API reference.
+
+- [Google tag API reference - event](https://developers.google.com/tag-platform/gtagjs/reference#event)
+
 ## Consent
 
 You can use the `consent` function to update your users' cookie preferences (GDPR).
@@ -219,6 +223,10 @@ You can use the `consent` function to update your users' cookie preferences (GDP
     },
  });
 ```
+
+For the possible values that can be specified in `arg` and `params`, please refer to the `consent` command in the Google tag API reference.
+
+- [Google tag API reference - consent](https://developers.google.com/tag-platform/gtagjs/reference#consent)
 
 ## Web Vitals
 
