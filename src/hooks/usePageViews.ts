@@ -3,7 +3,7 @@ import { Router } from "next/router";
 import { pageView } from "../interactions";
 
 export interface UsePageViewsOptions {
-  gaMeasurementId?: string;
+  gaMeasurementId: string;
   ignoreHashChange?: boolean;
   disabled?: boolean;
 }
@@ -12,17 +12,19 @@ export function usePageViews({
   gaMeasurementId,
   ignoreHashChange,
   disabled,
-}: UsePageViewsOptions = {}): void {
+}: UsePageViewsOptions = {
+  gaMeasurementId: "",
+  ignoreHashChange: false,
+  disabled: false,
+}): void {
   useEffect(() => {
     if (disabled) {
-      return;
+      return; 
     }
 
     const handleRouteChange = (url: URL): void => {
-      const _gaMeasurementId =
-        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-      pageView({ path: url.toString() }, _gaMeasurementId);
+      pageView({ path: url.toString() }, gaMeasurementId);
     };
 
     Router.events.on("routeChangeComplete", handleRouteChange);

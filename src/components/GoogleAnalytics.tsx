@@ -3,7 +3,7 @@ import Script, { ScriptProps } from "next/script";
 import { usePageViews } from "../hooks";
 
 type GoogleAnalyticsProps = {
-  gaMeasurementId?: string;
+  gaMeasurementId: string[] | string;
   gtagUrl?: string;
   strategy?: ScriptProps["strategy"];
   debugMode?: boolean;
@@ -30,16 +30,24 @@ export function GoogleAnalytics({
   trackPageViews,
   nonce,
 }: WithPageView | WithIgnoreHashChange): JSX.Element | null {
-  const _gaMeasurementId =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? gaMeasurementId;
 
-  usePageViews({
-    gaMeasurementId: _gaMeasurementId,
-    ignoreHashChange:
-      typeof trackPageViews === "object"
-        ? trackPageViews?.ignoreHashChange
-        : false,
-    disabled: !trackPageViews,
+  let _gaMeasurementId;
+
+  if (typeof gaMeasurementId === "string") {
+    _gaMeasurementId = [gaMeasurementId];
+  } else {
+    _gaMeasurementId = gaMeasurementId;
+  }
+
+  _gaMeasurementId.forEach((measurementId) => {
+    usePageViews({
+      gaMeasurementId: measurementId,
+      ignoreHashChange:
+        typeof trackPageViews === "object"
+          ? trackPageViews?.ignoreHashChange
+          : false,
+      disabled: !trackPageViews,
+    });
   });
 
   if (!_gaMeasurementId) {
@@ -61,10 +69,10 @@ export function GoogleAnalytics({
               'analytics_storage': 'denied'
             });` : ``
             }
-            gtag('config', '${_gaMeasurementId}', {
+            ${_gaMeasurementId.map((measurementId) => `gtag('config', '${measurementId}', {
               page_path: window.location.pathname,
               ${debugMode ? `debug_mode: ${debugMode},` : ""}
-            });
+            });`)}
           `}
       </Script>
     </>
