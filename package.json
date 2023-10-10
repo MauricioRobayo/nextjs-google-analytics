@@ -25,7 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
-    "@types/gtag.js": "^0.0.14",
+    "@types/gtag.js": "^0.0.16",
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.8",
     "@types/react-test-renderer": "^18.0.0",
