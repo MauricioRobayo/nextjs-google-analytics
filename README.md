@@ -1,3 +1,6 @@
+> [!NOTE]
+> You might not need this package. Please check [Third Party Libraries](https://nextjs.org/docs/app/building-your-application/optimizing/third-party-libraries) first.
+
 # Nextjs Google Analytics
 
 [![npm version](https://badge.fury.io/js/nextjs-google-analytics.svg)](https://badge.fury.io/js/nextjs-google-analytics)
