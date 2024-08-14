@@ -1,7 +1,7 @@
 import { consent } from './consent'
 
 const mockArg: Gtag.ConsentArg = 'default'
-const mockParams: Gtag.ConsentParams = { ad_storage: 'denied', analytics_storage: 'denied' }
+const mockParams: Gtag.ConsentParams = { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }
 
 describe("consent", () => {
   it("should not throw an error if gtag is not defined", () => {
