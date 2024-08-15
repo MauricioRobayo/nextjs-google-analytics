@@ -6,7 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "lint": "eslint src --fix",
-    "build": "del-cli dist && tsc",
+    "build": "tsc",
     "watch": "tsc-watch --onSuccess \"yalc push\"",
     "prepublishOnly": "npm run build",
     "test": "jest"
@@ -30,7 +30,6 @@
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
-    "del-cli": "^5.1.0",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.29.4",
