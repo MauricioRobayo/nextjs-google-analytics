@@ -9,10 +9,10 @@ jobs:
     name: Build, lint, and test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: "npm"
       - name: Install Dependencies
         run: npm ci
@@ -26,7 +26,7 @@ jobs:
         run: npm run build
       - name: Upload build
         if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist
@@ -35,11 +35,11 @@ jobs:
     needs: build-and-test
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: npm
+          node-version: 20
+          cache: "npm"
       - name: Download build
         uses: actions/download-artifact@v3
         with:
