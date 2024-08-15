@@ -140,6 +140,8 @@ describe("GoogleAnalytics", () => {
       render(<GoogleAnalytics gaMeasurementId="1234" defaultConsent="denied" />);
       expect(screen.queryByText(/'ad_storage': 'denied'/)).not.toBeNull();
       expect(screen.queryByText(/'analytics_storage': 'denied'/)).not.toBeNull();
+      expect(screen.queryByText(/'ad_user_data': 'denied'/)).not.toBeNull();
+      expect(screen.queryByText(/'ad_personalization': 'denied'/)).not.toBeNull();
     });
 
     it("should not call consent function at all when defaultConsent is set to 'granted'", () => {
