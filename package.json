@@ -28,7 +28,7 @@
     "@types/jest": "^27.4.1",
     "@types/react": "^18.0.8",
     "@types/react-test-renderer": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.4.0",
     "@typescript-eslint/parser": "^5.21.0",
     "del-cli": "^5.1.0",
     "eslint": "^8.14.0",
