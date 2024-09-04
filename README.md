@@ -223,8 +223,8 @@ You can use the `consent` function to update your users' cookie preferences (GDP
     params: {
       ad_storage: consentValue,
       analytics_storage: consentValue,
-      ad_user_data: conentValue,
-      ad_personalization: conentValue
+      ad_user_data: consentValue,
+      ad_personalization: consentValue
     },
  });
 ```
