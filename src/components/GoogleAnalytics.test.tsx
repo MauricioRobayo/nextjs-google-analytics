@@ -122,7 +122,39 @@ describe("GoogleAnalytics", () => {
     });
     expect(Router.events.on).toBeCalled();
   });
-
+  it('should not throw an error when no process.env exists', () => {
+    // These tests run in node however this component will also be rendered on the browser.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    process.env = undefined
+    render(
+      <GoogleAnalytics />
+    );
+    expect(usePageViewsSpy).toBeCalledWith({
+      disabled: true,
+      gaMeasurementId: undefined,
+      ignoreHashChange: false,
+    });
+    expect(Router.events.on).not.toBeCalled();
+  })
+  it('should work with the prop when no process.env exists', () => {
+    // These tests run in node however this component will also be rendered on the browser.
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    process.env = undefined
+    render(
+      <GoogleAnalytics
+        trackPageViews={{ ignoreHashChange: false }}
+        gaMeasurementId="5678"
+      />
+    );
+    expect(usePageViewsSpy).toBeCalledWith({
+      disabled: false,
+      gaMeasurementId: "5678",
+      ignoreHashChange: false,
+    });
+    expect(Router.events.on).toBeCalled();
+  })
   describe("debugMode", () => {
     it("should not have debug_mode when the debugMode prop is not set", () => {
       render(<GoogleAnalytics gaMeasurementId="1234" />);
